@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TeamComponent from "./components/Team/TeamComponent";
+import ScoreComponent from "./components/Score/ScoreComponent";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<TeamComponent />} />
             <Route path="teams" element={<TeamComponent />} />
+            <Route path="scores" element={<ScoreComponent />} />
           </Routes>
         </div>
       </div>
