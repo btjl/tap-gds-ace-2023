@@ -38,6 +38,7 @@ const ResultComponent = () => {
   return (
     <div className="container">
       <h1>Rankings</h1>
+      <h2>Group 1</h2>
       <TableRankingComponent data={resultObj["group1Rankings"]} />
 
       <h2>Group 2</h2>
