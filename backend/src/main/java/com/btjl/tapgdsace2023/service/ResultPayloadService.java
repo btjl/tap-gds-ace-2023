@@ -7,10 +7,7 @@ import com.btjl.tapgdsace2023.repository.TeamFootballMatchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ResultPayloadService {
@@ -33,8 +30,74 @@ public class ResultPayloadService {
         return new ResultPayload(group1Rankings, group2Rankings);
     }
 
-    private List<TeamRanking> calculateGroupRankingsForTeamsInGroup(List<TeamFootballMatch> group1) {
-        return null;
+    private List<TeamRanking> calculateGroupRankingsForTeamsInGroup(List<TeamFootballMatch> group) {
+
+        Map<Integer, TeamRanking> teamToRankingsMap = createTeamToRankingMap(group);
+        Set<TeamFootballMatch> visited = new HashSet<>();
+
+        TeamFootballMatch cur;
+        for (int i = 0; i < group.size(); i++) {
+            cur = group.get(i);
+            Integer curTeamId = cur.getTeam().getId();
+            Integer curTeamScore = cur.getScore();
+
+            if (visited.contains(cur)) {
+                continue;
+            }
+            visited.add(cur);
+            Integer matchId = cur.getFootballMatch().getId();
+
+            TeamFootballMatch complement = null;
+            for (int j = i + 1; j < group.size(); j++) {
+                complement = group.get(j);
+
+                TeamRanking curTeamRanking;
+                TeamRanking complementTeamRanking;
+                if (complement.getFootballMatch().getId().equals(matchId)) {
+                    visited.add(complement);
+
+                    Integer complementTeamId = complement.getTeam().getId();
+                    Integer complementTeamScore = complement.getScore();
+
+                    curTeamRanking = teamToRankingsMap.get(curTeamId);
+                    complementTeamRanking = teamToRankingsMap.get(complementTeamId);
+
+                    curTeamRanking.setTotalGoals(curTeamRanking.getTotalGoals() + curTeamScore);
+                    complementTeamRanking.setTotalGoals(complementTeamRanking.getTotalGoals() + complementTeamScore);
+
+
+                    if (curTeamScore > complementTeamScore) { // CUR WINS
+                        curTeamRanking.setTotalMatchPoint(curTeamRanking.getTotalMatchPoint() + 3);
+                        curTeamRanking.setTotalAlternateMatchPoint(curTeamRanking.getTotalAlternateMatchPoint() + 5);
+
+                        complementTeamRanking.setTotalAlternateMatchPoint(complementTeamRanking.getTotalAlternateMatchPoint() + 1);
+
+                    } else if (curTeamScore < complementTeamScore) { // COMPLEMENT WINS
+                        complementTeamRanking.setTotalMatchPoint(complementTeamRanking.getTotalMatchPoint() + 3);
+                        complementTeamRanking.setTotalAlternateMatchPoint(complementTeamRanking.getTotalAlternateMatchPoint() + 5);
+
+                        curTeamRanking.setTotalAlternateMatchPoint(curTeamRanking.getTotalAlternateMatchPoint() + 1);
+
+                    } else { // DRAW
+                        curTeamRanking.setTotalMatchPoint(curTeamRanking.getTotalMatchPoint() + 1);
+                        curTeamRanking.setTotalAlternateMatchPoint(curTeamRanking.getTotalAlternateMatchPoint() + 3);
+
+                        complementTeamRanking.setTotalMatchPoint(complementTeamRanking.getTotalMatchPoint() + 1);
+                        complementTeamRanking.setTotalAlternateMatchPoint(complementTeamRanking.getTotalAlternateMatchPoint() + 3);
+
+                    }
+                }
+            }
+        }
+
+        List<TeamRanking> result = new ArrayList<>();
+        for (Integer teamId : teamToRankingsMap.keySet()) {
+            result.add(teamToRankingsMap.get(teamId));
+        }
+
+        result.sort(Collections.reverseOrder());
+
+        return result;
     }
 
     private Map<Integer, TeamRanking> createTeamToRankingMap(List<TeamFootballMatch> group) {
