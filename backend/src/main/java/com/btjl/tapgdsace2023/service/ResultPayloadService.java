@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ResultPayloadService {
@@ -33,6 +35,23 @@ public class ResultPayloadService {
 
     private List<TeamRanking> calculateGroupRankingsForTeamsInGroup(List<TeamFootballMatch> group1) {
         return null;
+    }
+
+    private Map<Integer, TeamRanking> createTeamToRankingMap(List<TeamFootballMatch> group) {
+        Map<Integer, TeamRanking> result = new HashMap<>();
+
+        for (TeamFootballMatch teamFootballMatch : group) {
+            if (!result.containsKey(teamFootballMatch.getTeam().getId())) {
+
+                TeamRanking teamRanking = new TeamRanking(teamFootballMatch.getTeam().getName(), 0, 0, 0, 0);
+                teamRanking.setRegistrationDateInDays(
+                        convertRegistrationDateToValueInDays(
+                                teamFootballMatch.getTeam().getRegistrationDate()));
+
+                result.put(teamFootballMatch.getTeam().getId(), teamRanking);
+            }
+        }
+        return result;
     }
 
     private Integer convertRegistrationDateToValueInDays(String registrationDate) {
