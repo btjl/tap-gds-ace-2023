@@ -1,3 +1,6 @@
+import axios from "axios";
+
+const TEAM_REST_API_URL = "http://localhost:8080/api/v1/teams/";
 class TeamService {
   processTextAreaInput(textAreaInput) {
     const splitInputArray = textAreaInput.split("\n");
@@ -16,6 +19,10 @@ class TeamService {
     }
 
     return teamsArray;
+  }
+
+  registerTeams(teamsObj) {
+    return axios.post(TEAM_REST_API_URL, teamsObj);
   }
 }
 
