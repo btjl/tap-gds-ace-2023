@@ -35,6 +35,13 @@ public class ResultPayloadService {
         return null;
     }
 
+    private Integer convertRegistrationDateToValueInDays(String registrationDate) {
+        String[] ddMMSplit = registrationDate.split("/");
+        int dd = Integer.parseInt(ddMMSplit[0]);
+        int MM = Integer.parseInt(ddMMSplit[1]) * 30;
+        return dd + MM;
+    }
+
     private List<TeamFootballMatch> getTeamsInGroup(List<TeamFootballMatch> teamFootballMatchList, int groupNumber) {
 
         List<TeamFootballMatch> result = new ArrayList<>();
