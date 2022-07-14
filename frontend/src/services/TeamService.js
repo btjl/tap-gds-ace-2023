@@ -11,7 +11,6 @@ class TeamService {
         splitInputArray[i].split(" ");
 
       teamsArray.push({
-        id: i,
         name: curName,
         registrationDate: curRegistrationDate,
         groupNumber: curGroup,
