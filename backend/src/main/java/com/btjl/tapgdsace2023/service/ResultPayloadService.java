@@ -7,6 +7,7 @@ import com.btjl.tapgdsace2023.repository.TeamFootballMatchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,7 +35,14 @@ public class ResultPayloadService {
         return null;
     }
 
-    private List<TeamFootballMatch> getTeamsInGroup(List<TeamFootballMatch> teamFootballMatchList, int i) {
-        return null;
+    private List<TeamFootballMatch> getTeamsInGroup(List<TeamFootballMatch> teamFootballMatchList, int groupNumber) {
+
+        List<TeamFootballMatch> result = new ArrayList<>();
+        for (TeamFootballMatch teamFootballMatch : teamFootballMatchList) {
+            if (teamFootballMatch.getTeam().getGroupNumber().equals(groupNumber)) {
+                result.add(teamFootballMatch);
+            }
+        }
+        return result;
     }
 }
