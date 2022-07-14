@@ -1,3 +1,7 @@
+import axios from "axios";
+
+const SCORE_REST_API_URL = "http://localhost:8080/api/v1/scores/";
+
 class ScoreService {
   processTextAreaInput(textAreaInput) {
     const splitInputArray = textAreaInput.split("\n");
@@ -15,6 +19,10 @@ class ScoreService {
     }
 
     return matchScoresArray;
+  }
+
+  saveMatchScores(matchScores) {
+    return axios.post(SCORE_REST_API_URL, matchScores);
   }
 }
 
