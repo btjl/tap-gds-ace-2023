@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>C:/Users/tanji/Documents/GitHub/tap-gds-ace-2023/backend</OriginalElement>
+  <nodes>
+    <node x="989.0" y="0.0">com.btjl.tapgdsace2023.dto.FootballMatchScores</node>
+    <node x="799.0" y="627.0">com.btjl.tapgdsace2023.model.ResultPayload</node>
+    <node x="231.0" y="627.0">com.btjl.tapgdsace2023.service.ResultPayloadService</node>
+    <node x="0.0" y="0.0">com.btjl.tapgdsace2023.model.TeamFootballMatch</node>
+    <node x="0.0" y="861.0">com.btjl.tapgdsace2023.controller.TeamController</node>
+    <node x="607.0" y="1006.0">com.btjl.tapgdsace2023.controller.ScoreController</node>
+    <node x="744.0" y="0.0">com.btjl.tapgdsace2023.model.Team</node>
+    <node x="1016.0" y="1006.0">com.btjl.tapgdsace2023.Tapgdsace2023ApplicationTests</node>
+    <node x="0.0" y="1128.0">com.btjl.tapgdsace2023.Tapgdsace2023Application</node>
+    <node x="271.0" y="1128.0">com.btjl.tapgdsace2023.controller.ResultController</node>
+    <node x="0.0" y="627.0">com.btjl.tapgdsace2023.model.FootballMatch</node>
+    <node x="1071.0" y="1128.0">com.btjl.tapgdsace2023.repository.FootballMatchRepository</node>
+    <node x="778.0" y="1128.0">com.btjl.tapgdsace2023.repository.TeamFootballMatchRepository</node>
+    <node x="367.0" y="0.0">com.btjl.tapgdsace2023.model.TeamRanking</node>
+    <node x="33.5" y="393.0">com.btjl.tapgdsace2023.model.TeamFootballMatch.TeamFootballMatchId</node>
+    <node x="271.0" y="861.0">com.btjl.tapgdsace2023.service.TeamFootballMatchService</node>
+    <node x="524.0" y="1128.0">com.btjl.tapgdsace2023.repository.TeamRepository</node>
+    <node x="0.0" y="1006.0">com.btjl.tapgdsace2023.controller.CompositeController</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.btjl.tapgdsace2023.model.TeamFootballMatch.TeamFootballMatchId" target="com.btjl.tapgdsace2023.model.TeamFootballMatch" relationship="INNER_CLASS">
+      <point x="0.0" y="-94.5" />
+      <point x="0.0" y="171.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.6287755102040816" showDependencies="false" x="630.0127883620235" y="657.6386158622845" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
