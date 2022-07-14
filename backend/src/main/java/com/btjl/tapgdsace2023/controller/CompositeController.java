@@ -4,6 +4,7 @@ import com.btjl.tapgdsace2023.repository.FootballMatchRepository;
 import com.btjl.tapgdsace2023.repository.TeamFootballMatchRepository;
 import com.btjl.tapgdsace2023.repository.TeamRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,5 +21,12 @@ public class CompositeController {
         this.teamRepository = teamRepository;
         this.footballMatchRepository = footballMatchRepository;
         this.teamFootballMatchRepository = teamFootballMatchRepository;
+    }
+
+    @DeleteMapping("clear")
+    public void clearAllData() {
+        teamFootballMatchRepository.deleteAll();
+        footballMatchRepository.deleteAll();
+        teamRepository.deleteAll();
     }
 }
